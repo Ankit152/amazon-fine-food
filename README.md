@@ -1,4 +1,4 @@
-# Amazon Fine Food Review
+# Amazon Fine Food Review 🍲
 
 <p align="center">
   <img src="https://github.com/Ankit152/amazon-fine-food/blob/master/img/cookie.jpg"/>
