@@ -1,7 +1,7 @@
 # Amazon Fine Food Review
 
 <p align="center">
-  <img src="https://github.com/Ankit152/amazon-fine-food/blob/master/cookie.jpg"/>
+  <img src="https://github.com/Ankit152/amazon-fine-food/blob/master/img/cookie.jpg"/>
 </p>
 
 Dataset link: https://www.kaggle.com/snap/amazon-fine-food-reviews
