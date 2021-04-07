@@ -24,7 +24,8 @@ data = pd.read_csv('preprocessed.csv')
 
 print('Dataset loaded....')
 
-def clean_text(text):
+def cleaning(text):
+    text = str(text)
     text = text.lower()
     pattern = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
     clean = re.compile('<.*?>')
@@ -58,5 +59,49 @@ def clean_text(text):
     return text
 
 
+print('Cleaning of the data taking place....')
 
+data['Text'] = data['Text'].map(cleaning)
+
+data['Score'] = data['Score'].replace({'positive':0,'negative':1})
+
+x = data['Text'].values
+y = data['Score'].values
+
+
+# splitting the data
+xtrain, xtest, ytrain, ytest = tts(x,y,test_size=0.2,stratify=y)
+
+# converting it to categorical variable
+ytrain = to_categorical(ytrain)
+ytest = to_categorical(ytest)
+
+# converting to text to sequences
+tokenizer = Tokenizer(25000,lower=True,oov_token='UNK')
+tokenizer.fit_on_texts(xtrain)
+xtrain = tokenizer.texts_to_sequences(xtrain)
+xtest = tokenizer.texts_to_sequences(xtest)
+
+xtrain = pad_sequences(xtrain,maxlen=100,padding='post')
+xtest = pad_sequences(xtest,maxlen=100,padding='post')
+
+print("Data preprocessing is over....")
+
+# making the model
+
+print("Making the model....")
+model = Sequential()
+model.add(Embedding(25000,64,input_length=100))
+model.add(Dropout(0.5))
+model.add(Bidirectional(LSTM(64,return_sequences=True)))
+model.add(Bidirectional(LSTM(128)))
+model.add(Dropout(0.3))
+model.add(Dense(128))
+model.add(Dense(2,activation="softmax"))
+model.compile(optimizer="adam",loss="catagorical_crossentropy",metrics=['accuracy'])
+print("The model is defined...")
+print(model.summary())
+
+# fitting it into the data
+hist=model.fit(xtrain,ytrain,epochs=15,validfation_data=(xtest,ytest))
 
