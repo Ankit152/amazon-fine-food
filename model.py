@@ -105,3 +105,37 @@ print(model.summary())
 # fitting it into the data
 hist=model.fit(xtrain,ytrain,epochs=15,validfation_data=(xtest,ytest))
 
+print("Saving the model into the disk....")
+model.save('reviews.h5')
+print("Model saved into the disk....")
+
+
+# plotting the figures
+print("Plotting the figures....")
+plt.figure(figsize=(15,10))
+plt.plot(hist.history['accuracy'],c='b',label='train')
+plt.plot(hist.history['val_accuracy'],c='r',label='validation')
+plt.title("Model Accuracy vs Epochs")
+plt.xlabel("EPOCHS")
+plt.ylabel("ACCURACY")
+plt.legend(loc='lower right')
+plt.savefig('./img/accuracy.png')
+
+
+plt.figure(figsize=(15,10))
+plt.plot(hist.history['loss'],c='orange',label='train')
+plt.plot(hist.history['val_loss'],c='g',label='validation')
+plt.title("Model Loss vs Epochs")
+plt.xlabel("EPOCHS")
+plt.ylabel("LOSS")
+plt.legend(loc='upper right')
+plt.savefig('./img/loss.png')
+print("Figures saved in the disk....")
+
+# testing the model
+print("Testing the model....")
+print("The result obtained is...\n")
+model.evaluate(xtest,ytest)
+
+joblib.dump(tokenizer,'tokenizer.pkl')
+
