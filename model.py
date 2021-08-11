@@ -104,7 +104,7 @@ print("The model is defined...")
 print(model.summary())
 
 # fitting it into the data
-hist=model.fit(xtrain,ytrain,epochs=15,validfation_data=(xtest,ytest))
+hist=model.fit(xtrain,ytrain,epochs=20,validfation_data=(xtest,ytest))
 
 print("Saving the model into the disk....")
 model.save('reviews.h5')
