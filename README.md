@@ -17,3 +17,19 @@ This dataset consists of reviews of fine foods from amazon. The data span a peri
 * 256,059 users
 * 74,258 products
 * 260 users with > 50 reviews
+
+## Exploratory Data Analysis
+```Countplot of ratings.```
+<p>
+  <img src="https://github.com/Ankit152/amazon-fine-food/blob/master/img/countplotRating.jpg">
+</p>
+
+```Counplot of sentiments before preprocessing.```
+<p>
+  <img src="https://github.com/Ankit152/amazon-fine-food/blob/master/img/countplotSentiment1.jpg">
+</p>
+
+```Counplot of sentiments after preprocessing.```
+<p>
+  <img src="https://github.com/Ankit152/amazon-fine-food/blob/master/img/countplotSentiment2.jpg">
+</p>
